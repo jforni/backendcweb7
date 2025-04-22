@@ -6,7 +6,10 @@ const usuarioGet = async (req = request, res = response) => {
   const {desde=0, limite=5} = req.query;
   const query = {estado:true};
 
-  const [ total, usuarios ] = await Promise.all([Usuario.countDocuments(query), Usuario.find(query).skip(desde).limit(limite)]);
+  const [ total, usuarios ] = await Promise.all([
+    Usuario.countDocuments(query), 
+    Usuario.find(query).skip(desde).limit(limite)
+  ]);
 
   res.json({
     mensaje: "Usuarios obtenidos",
@@ -29,7 +32,7 @@ const usuarioGetID = async (req = request, res = response) => {
 const usuarioPost = async (req=request, res=response) => {
   //Recibir el cuerpo de la petición 
   const datos = req.body;
-  console.log(datos)
+  
   const { nombre, apellido, correo, password, rol} = datos;
   const usuario = new Usuario({nombre, apellido, correo, password, rol});
 
