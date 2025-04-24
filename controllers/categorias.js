@@ -8,7 +8,10 @@ const categoriasGet = async (req=request, res=response)  => {
 
     const [total, categorias ] = await Promise.all([
         Categoria.countDocuments(query),
-        Categoria.find(query).skip(desde).limit(limite).populate('usuario', 'correo')
+        Categoria.find(query)
+            .skip(desde)
+            .limit(limite)
+            .populate('usuario', 'correo')
     ])
 
     res.json({
