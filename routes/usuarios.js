@@ -9,7 +9,12 @@ const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router = Router();
 
-router.get('/', usuarioGet);
+router.get('/', 
+    [
+        validarJWT,
+        esAdminRole
+    ],
+    usuarioGet);
 
 router.get('/:id', [
     check("id", "El id no es válido").isMongoId(),
