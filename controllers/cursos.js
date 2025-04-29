@@ -39,7 +39,7 @@ const cursoPost = async (req=request, res=response) => {
     const {precio, categoria, descripcion, img} = req.body;
     const nombre = req.body.nombre.toUpperCase();
 
-    const cursoDB= await Curso.FindOne({nombre});
+    const cursoDB= await Curso.findOne({nombre});
 
     //validar si el curso existe
     if(cursoDB){
