@@ -11,7 +11,7 @@ const categoriasGet = async (req=request, res=response)  => {
         Categoria.find(query)
             .skip(desde)
             .limit(limite)
-            .populate('usuario', 'correo')
+            /* .populate('usuario', 'correo') */
     ])
 
     res.json({

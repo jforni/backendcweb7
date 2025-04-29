@@ -11,7 +11,7 @@ const cursosGet = async (req=request, res=response) => {
         Curso.find(query)
             .skip(Number(desde))
             .limit(Number(limite))
-            .populate('usuario','correo')
+     /*        .populate('usuario','correo') */
             .populate('categoria', 'nombre'),
     ]);
 
@@ -26,7 +26,9 @@ const cursosGet = async (req=request, res=response) => {
 const cursoGet = async (req=request, res=response) => {
     const {id} = req.params;
 
-    const curso = await Curso.findById(id).populate('usuario', 'correo').populate('categoria', 'nombre');
+    const curso = await Curso.findById(id)
+        /* .populate('usuario', 'correo') */
+        .populate('categoria', 'nombre');
 
     res.json({
         msg: 'Curso obtenido según lo pedido',
