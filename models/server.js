@@ -5,7 +5,7 @@ const { dbConnection } = require('../database/config');
 class Server{
     constructor(){
         this.app = express();
-        this.port = process.env.PORT;
+        this.port = process.env.PORT || 3000;
         this.authPath = '/api/auth';
         this.usuariosPath = '/api/usuarios';
         this.categoriasPath = '/api/categorias';
