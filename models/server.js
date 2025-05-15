@@ -28,7 +28,7 @@ class Server{
 
     middlewares(){
         //CORS
-        /* this.app.use(cors()); */
+        this.app.use(cors());
 
         //Leer lo que el usuario envía por el cuerpo de la petición
         this.app.use(express.json());
