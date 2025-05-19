@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { dbConnection } = require('../database/config');
 
-class Server{
-    constructor(){
+class Server {
+    constructor() {
         this.app = express();
         this.port = process.env.PORT || 3000;
         this.authPath = '/api/auth';
@@ -15,19 +15,23 @@ class Server{
         //Conectar con Base de datos
         this.conectarDB();
 
-       //Middlewares
-       this.middlewares();
+        //Middlewares
+        this.middlewares();
 
-       //Función para las rutas
-       this.routes();
+        //Función para las rutas
+        this.routes();
     }
 
-    async conectarDB(){
+    async conectarDB() {
         await dbConnection();
     }
 
-    middlewares(){
+    middlewares() {
         //CORS
+       /*  this.app.use(cors({
+            origin: 'https://tu-frontend.netlify.app',
+            credentials: true // necesario para que mande cookies
+        })); */
         this.app.use(cors());
 
         //Leer lo que el usuario envía por el cuerpo de la petición
@@ -37,7 +41,7 @@ class Server{
         this.app.use(express.static('public'));
     }
 
-    routes(){
+    routes() {
         this.app.use(this.usuariosPath, require('../routes/usuarios'));
         this.app.use(this.authPath, require('../routes/auth'));
         this.app.use(this.categoriasPath, require('../routes/categorias'));
@@ -45,7 +49,7 @@ class Server{
         this.app.use(this.buscarPath, require('../routes/buscar'));
     }
 
-    listen(){
+    listen() {
         this.app.listen(this.port, () => {
             console.log('Server online port: ', this.port);
         })
